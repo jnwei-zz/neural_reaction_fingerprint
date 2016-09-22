@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#SBATCH -p aspuru-guzik
+#SBATCH -n 1 
+#SBATCH -t 14:00:00 
+#SBATCH --mem=2000
+#SBATCH -o morgan1_balanced_200each_100run_norm.test
+#SBATCH -e morgan1_balanced_200each_100run_norm.err
+#SBATCH -J morgan1_bal_200each 
+
+# To check:
+#  - copy data files
+#  - Data file percent matches train percent (and file names in hypopt file)
+#  - fp type is correct and consistent in sub and hypopt
+
+scfolder="/scratch/$(date +%Y%m%d%H%M)_morgan_bal_200each_1/"
+curr=$(pwd)
+
+# Create scratch folder on cluster space
+mkdir -p  $scfolder
+
+#edit these
+cp fp1_morgan_hypopt_rxn_predict.py $scfolder 
+cp fp1_reaction_estimator.py $scfolder
+
+cp ~/reaction_learn/data/balanced_set/200each_class_3_2/balanced_200each_train_inputs_1.dat $scfolder/train_inputs.dat
+cp ~/reaction_learn/data/balanced_set/200each_class_3_2/balanced_200each_train_targets.dat $scfolder/train_targets.dat
+
+# execute python 
+cd $scfolder
+
+python -u fp1_morgan_hypopt_rxn_predict.py > $curr/output/morgan1_balanced_200each_train_100run_norm.out
+
+# retrieve files back to local directory.
+cd
+mkdir -p  $curr/output/
+cp  $scfolder/morgan*  $curr/output/
+rm -r $scfolder

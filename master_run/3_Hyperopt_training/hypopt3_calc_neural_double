@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#SBATCH -p aspuru-guzik
+#SBATCH -n 1 
+#SBATCH -t 48:00:00 
+#SBATCH --mem=4000
+#SBATCH -o neural3_balanced_200each.test
+#SBATCH -e neural3_balanced_200each.err
+#SBATCH -J neural_bal_200each_3 
+
+# To check:
+#  - copy data files
+#  - Data file percent matches train percent (and file names in hypopt file)
+#  - fp type is correct and consistent in sub and hypopt
+
+scfolder="/scratch/$(date +%Y%m%d%H%M)_200each_class31_prod3_neural/"
+curr=$(pwd)
+
+# Create scratch folder on cluster space
+mkdir -p  $scfolder
+
+#edit these
+cp fp1_double_neural_hypopt_rxn_predict.py $scfolder 
+cp fp1_double_reaction_estimator.py $scfolder
+# prod3
+cp ~/reaction_learn/data/balanced_set/200each_class_3_2/balanced_200each_train_inputs_3.dat $scfolder/train_inputs.dat
+cp ~/reaction_learn/data/balanced_set/200each_class_3_2/balanced_200each_train_targets.dat $scfolder/train_targets.dat
+
+# execute python 
+cd $scfolder
+
+python -u fp1_double_neural_hypopt_rxn_predict.py > $curr/output/neural3_balanced_200each_train_100runs_norm_class31.out
+
+# retrieve files back to local directory.
+cd
+mkdir -p  $curr/output/
+cp  $scfolder/neural*  $curr/output/
+rm -r $scfolder/

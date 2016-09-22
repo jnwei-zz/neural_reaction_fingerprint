@@ -1,0 +1,15 @@
+CC=C(C)C.Cl>COC>
+CC1=CCCC1.BrBr>ClC(Cl)(Cl)Cl>
+CC1=CCCC1.O>[H]B([H])[H].C1CCOC1.OO.[Na+].[O-]>
+CCC(C)=CC.[O-][O+]=O>CSC>
+CC=C1CCCCC1.Br>CCOOCC.[H][V]>
+CC=C1CCCCC1.Cl>CCOOCC.[H][V]>
+CCC=CC.OOC(=O)C1=CC=CC=C1>OS(O)(=O)=O>
+CC1=CCCC1.[Nd]>O=[Os](=O)(=O)=O.OO>
+CC1=CCCCC1.[Nd]>[K+].[O-][Mn](=O)(=O)=O.[OH-]>
+CC1=CCCCC1.CC(=O)OO>OS(O)(=O)=O>
+CC1=CCCCC1.[O-][O+]=O>CSC>
+CC1=C(C)CCCC1.[H][H]>[Pt]>
+C1CCC2=CCCCC2C1.[Nd]>OS(O)(=O)=O>
+C1CCC2=CCCCC2C1.O>CC(=O)O[Hg]OC(C)=O.O.[Na+].[H][B-]([H])([H])[H]> 
+C1CCC2=CCCCC2C1.ClCl>O>

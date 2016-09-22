@@ -1,0 +1,7 @@
+CC=C(C)C.Br>CCOOCC>
+CC=C1CCCC1.[Nd]>OS(O)(=O)=O.O>
+CC(C)C=C.Br>COC>
+C=CC1=CC=CC=C1.[Nd]>BrC(Br)Br.[O-][Na]>
+CC=CC.CO>Cl>
+CC=CC.BrBr>CO.[Li+].[Cl-]>
+C=CC1=CC=CC=C1.[Nd]>COC>
