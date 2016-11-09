@@ -140,11 +140,11 @@ target_name_array = ['prob_'+str(i) for i in range(max_vector_length)]
 header = 'smiles,'+','.join(target_name_array) + '\n'
 
 for Mark_rxn in Mark_rxn_dict.keys():
-    with open('balanced_set/'+Mark_rxn+'.dat', 'w') as f:
+    with open('../balanced_set/'+Mark_rxn+'.dat', 'w') as f:
         f.write(header)
 
 for rxn in other_rxn_dict.keys():
-    with open('balanced_set/'+rxn+'.dat', 'w') as f:
+    with open('../balanced_set/'+rxn+'.dat', 'w') as f:
         f.write(header)
 
 debug_flag = False 
