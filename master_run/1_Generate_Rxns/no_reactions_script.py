@@ -108,7 +108,7 @@ def write_rxn_NR(mol_smi, other_rct_smi, reagent_smi):
 
 #NR_reaction_f = open('all_rxns/NR_rxns_noswap_vec.dat','a')
 #NR_reaction_f = open('03_22_rxns/NR_rxns_swap_vec.dat','a')
-NR_reaction_f = open('balanced_set/NR_rxns_noswap_vec.dat','w')
+NR_reaction_f = open('../balanced_set/NR_rxns_noswap_vec.dat','w')
 #NR_reaction_f = open('example_NRs.dat','a')
 
 

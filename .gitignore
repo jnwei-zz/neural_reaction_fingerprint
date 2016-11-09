@@ -113,3 +113,8 @@ talks/*.mtc1
 talks/*.out
 talks/*.synctex.gz
 talks/*.brf
+
+/master_run/balanced_set/*
+!/master_run/balanced_set/.keep
+
+/data/*.dat

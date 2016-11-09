@@ -21,7 +21,7 @@ from rdkit.Chem import AllChem
 #from substrate_gen import AttachCarbonAtCarbon, AttachChlorineAtCarbon,\
 #            AttachBromineAtCarbon, AttachIodineAtCarbon,\
 #            CheckandRemoveDuplicates, get_molecule_smi
-from substrate_gen import get_molecule_smi
+from generate_substrates import get_molecule_smi
 from toolkit import GetAdjHalAtoms, MarkBulkierAtom
 import numpy as np
 import copy
@@ -74,8 +74,8 @@ E_methyl_shift_rxn = AllChem.ReactionFromSmarts('[C:1][CD4:2][C:3][Br,Cl,I:4].[O
 target_name_array = ['prob_'+str(i) for i in range(num_rxn_types)]
 header = 'smiles,'+','.join(target_name_array) + '\n'
 
-for fname in ['balanced_set/sn2_rxn.dat','balanced_set/E_rxn.dat', 
-        'balanced_set/alkylhal_NR_rxn.dat', 'balanced_set/sn2m_rxn.dat','balanced_set/Em_rxn.dat']: 
+for fname in ['../balanced_set/sn2_rxn.dat','../balanced_set/E_rxn.dat', 
+        '../balanced_set/alkylhal_NR_rxn.dat', '../balanced_set/sn2m_rxn.dat','../balanced_set/Em_rxn.dat']: 
     with open(fname,'w') as f:
         f.write(header)
 
@@ -237,24 +237,24 @@ def tertiary_rxn_alg(mol,nucl, solv):
         #print 'Mechanism SN1'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['tertbutyl-O']:
         #print 'Mechanism E2'
         prods = E_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'2':1.0})
-        with open('balanced_set/E_rxn.dat','a') as f:
+        with open('../balanced_set/E_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0 
     elif nucl == nucl_dict['hydroxide']: 
         prods = E_rxn_OH.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'2':1.0})
-        with open('balanced_set/E_rxn.dat','a') as f:  # no diff for mech between E and E_rxn_OH
+        with open('../balanced_set/E_rxn.dat','a') as f:  # no diff for mech between E and E_rxn_OH
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return  0
     elif nucl == nucl_dict['water']:
-        with open('balanced_set/alkylhal_NR_rxn.dat','a') as f: 
+        with open('../balanced_set/alkylhal_NR_rxn.dat','a') as f: 
             f.write(write_rxn_NR(mol, nucl, solv))
         return 0 
     return 'nucleophile not identified'
@@ -265,21 +265,21 @@ def methylhalide_rxn_alg(mol, nucl, solv):
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['hydroxide']:
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol, nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['tertbutyl-O']:
         #print 'no reaction' 
         return write_rxn_NR(mol, nucl, solv)
     elif nucl == nucl_dict['water']:
-        with open('balanced_set/alkylhal_NR_rxn.dat','a') as f: 
+        with open('../balanced_set/alkylhal_NR_rxn.dat','a') as f: 
             f.write(write_rxn_NR(mol, nucl, solv))
         return 0 
     return 'nucleophile not identified'
@@ -290,7 +290,7 @@ def primary_rxn_alg(mol, nucl, solv):
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['hydroxide']:
@@ -298,9 +298,9 @@ def primary_rxn_alg(mol, nucl, solv):
         prods_1 = sn2_rxn.RunReactants((mol, nucl))
         prods_2 = E_rxn_OH.RunReactants((mol,nucl))
         #print (prods_1[0] + prods_2[0], )
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv,  write_rxn_vec_str({'1':0.5, '2':0.5}), (prods_1[0]+prods_2[0], ))) 
-        with open('balanced_set/E_rxn.dat','a') as f:
+        with open('../balanced_set/E_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv,  write_rxn_vec_str({'1':0.5, '2':0.5}), (prods_1[0]+prods_2[0], ))) 
         return 0 
     elif nucl == nucl_dict['tertbutyl-O']:
@@ -310,7 +310,7 @@ def primary_rxn_alg(mol, nucl, solv):
         return write_rxn(mol, nucl, solv, this_rxn_vec_str, prods)
     elif nucl == nucl_dict['water']:
         #print 'no reaction'
-        with open('balanced_set/alkylhal_NR_rxn.dat','a') as f: 
+        with open('../balanced_set/alkylhal_NR_rxn.dat','a') as f: 
             f.write(write_rxn_NR(mol, nucl, solv))
         return 0 
     return 'nucleophile not identified'
@@ -321,24 +321,24 @@ def primary_rxn_bulky_alg(mol, nucl, solv):
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     if nucl == nucl_dict['hydroxide']:
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['tertbutyl-O']:
         #print 'no reaction'
-        with open('balanced_set/alkylhal_NR_rxn.dat','a') as f: 
+        with open('../balanced_set/alkylhal_NR_rxn.dat','a') as f: 
             f.write(write_rxn_NR(mol, nucl, solv))
         return 0 
     elif nucl == nucl_dict['water']:
         #print 'no reaction'
-        with open('balanced_set/alkylhal_NR_rxn.dat','a') as f: 
+        with open('../balanced_set/alkylhal_NR_rxn.dat','a') as f: 
             f.write(write_rxn_NR(mol, nucl, solv))
         return 0 
     return 'nucleophile not identified'
@@ -348,7 +348,7 @@ def secondary_rxn_alg(mol, nucl, solv):
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['hydroxide']:
@@ -356,7 +356,7 @@ def secondary_rxn_alg(mol, nucl, solv):
         prods = sn2_rxn.RunReactants((mol, nucl))
         #return write_rxn(mol, nucl, solv, 1, prods)
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['tertbutyl-O']:
@@ -367,12 +367,12 @@ def secondary_rxn_alg(mol, nucl, solv):
         prods = E_Zait_rxn.RunReactants((Mark_labeled_alkhal,nucl))
         #return write_rxn(mol, nucl, solv, 2, prods)
         this_rxn_vec_str = write_rxn_vec_str({'2':1.0})
-        with open('balanced_set/E_rxn.dat','a') as f:  # no diff for mech between E and E_rxn_OH
+        with open('../balanced_set/E_rxn.dat','a') as f:  # no diff for mech between E and E_rxn_OH
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return  0
     elif nucl == nucl_dict['water']:
         #print 'no reaction'
-        with open('balanced_set/alkylhal_NR_rxn.dat','a') as f: 
+        with open('../balanced_set/alkylhal_NR_rxn.dat','a') as f: 
             f.write(write_rxn_NR(mol, nucl, solv))
         return 0 
     return 'nucleophile not identified'
@@ -384,7 +384,7 @@ def secondary_rxn_bulky_alg(mol, nucl, solv):
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['hydroxide']:
@@ -392,23 +392,23 @@ def secondary_rxn_bulky_alg(mol, nucl, solv):
         #print 'Mechanism SN2'
         prods = sn2_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'1':1.0})
-        with open('balanced_set/sn2_rxn.dat','a') as f:
+        with open('../balanced_set/sn2_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['tertbutyl-O']:
         #print 'Mechanism E2'
         prods = E_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'2':1.0})
-        with open('balanced_set/E_rxn.dat','a') as f:
+        with open('../balanced_set/E_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0 
     elif nucl == nucl_dict['water']:
         #print 'SN2 and E2 methyl hydride shift' 
         prods_1 = sn_methyl_shift_rxn.RunReactants((mol,nucl))
         prods_2 = E_methyl_shift_rxn.RunReactants((mol,nucl))
-        with open('balanced_set/sn2m_rxn.dat','a') as f:
+        with open('../balanced_set/sn2m_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv,  write_rxn_vec_str({'3':0.5, '4':0.5}), (prods_1[0]+prods_2[0], ))) 
-        with open('balanced_set/Em_rxn.dat','a') as f:
+        with open('../balanced_set/Em_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv,  write_rxn_vec_str({'3':0.5, '4':0.5}), (prods_1[0]+prods_2[0], ))) 
         return 0 
     return 'nucleophile not identified'
@@ -418,11 +418,11 @@ def secondary_rxn_double_bulky_alg(mol, nucl, solv):
     if nucl == nucl_dict['water']:
         prods = sn_methyl_shift_rxn.RunReactants((mol,nucl))
         this_rxn_vec_str = write_rxn_vec_str({'3':1.0})
-        with open('balanced_set/sn2m_rxn.dat','a') as f:
+        with open('../balanced_set/sn2m_rxn.dat','a') as f:
             f.write(write_rxn(mol, nucl, solv, this_rxn_vec_str, prods))
         return 0
     elif nucl == nucl_dict['tertbutyl-O']:
-        with open('balanced_set/alkylhal_NR_rxn.dat','a') as f: 
+        with open('../balanced_set/alkylhal_NR_rxn.dat','a') as f: 
             f.write(write_rxn_NR(mol, nucl, solv))
         return 0 
     else:
