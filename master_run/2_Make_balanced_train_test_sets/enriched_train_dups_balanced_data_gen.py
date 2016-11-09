@@ -10,13 +10,17 @@ num_test_rxn -- number of test reactions for each rxn type
 @pre should already have all reactions in balanced_set dir, each file is a reaction type. 
 
 '''
+import sys
+sys.path.insert(0, '../../neuralfingerprint')
+
 from os import listdir
 from os.path import isfile, join
 import autograd.numpy as np
-from neuralfingerprint.parse_data import get_train_test_sets, strip_smiles_carrots, split_smiles_triples, load_data_noslice, load_data_noslice 
+from parse_data import get_train_test_sets, strip_smiles_carrots, split_smiles_triples, load_data_noslice, load_data_noslice 
 import pickle as pkl
 
-dat_file_names = [f for f in listdir('./balanced_set') if isfile(join('./balanced_set',f))]
+dat_file_names = [f for f in listdir('../balanced_set') if isfile(join('../balanced_set',f))]
+dat_file_names.remove('.keep')
 #dat_file_names = ['alkylhal_NR_rxn.dat', 'E_rxn.dat', 'Em_rxn.dat', 'polymer.dat']
 
 num_outputs = 17
@@ -56,7 +60,7 @@ def space_fill(data_set_tup, fill_amt):
 
 for dat_file_nm in dat_file_names: 
 
-    inp_smi, targs = load_data_noslice('./balanced_set/'+dat_file_nm, input_name='smiles', 
+    inp_smi, targs = load_data_noslice('../balanced_set/'+dat_file_nm, input_name='smiles', 
                 target_name_arr=target_name_array)
 
     rxn_ct = len(inp_smi)
@@ -64,7 +68,7 @@ for dat_file_nm in dat_file_names:
     # If the number of reactions in the set is more than that required
     if rxn_ct > num_per_rxn + num_test_rxn :
         # already preshuffled
-        df_train_set, df_test_set = get_train_test_sets('./balanced_set/'+dat_file_nm, input_name='smiles',
+        df_train_set, df_test_set = get_train_test_sets('../balanced_set/'+dat_file_nm, input_name='smiles',
             target_name_arr=target_name_array, N_train=num_per_rxn)
     
         train_inputs.append(df_train_set[0])
@@ -79,7 +83,7 @@ for dat_file_nm in dat_file_names:
         print dat_file_nm + ' has fewer than ' + str(num_per_rxn)
        
         # split these reactions in half:
-        df_train_set, df_test_set = get_train_test_sets('./balanced_set/'+dat_file_nm, input_name='smiles',
+        df_train_set, df_test_set = get_train_test_sets('../balanced_set/'+dat_file_nm, input_name='smiles',
             target_name_arr=target_name_array, N_train=rxn_ct/2)
 
         # Create new data sets that are space-filled versions to match required length
@@ -94,7 +98,7 @@ for dat_file_nm in dat_file_names:
     else:
         print dat_file_nm + ' has fewer than ' + str(num_per_rxn + num_test_rxn) 
 
-        df_train_set, df_test_set = get_train_test_sets('./balanced_set/'+dat_file_nm, input_name='smiles',
+        df_train_set, df_test_set = get_train_test_sets('../balanced_set/'+dat_file_nm, input_name='smiles',
             target_name_arr=target_name_array, N_train=num_per_rxn)
 
         train_inputs.append(df_train_set[0])
@@ -136,37 +140,37 @@ test_set_200each_inputs_1, test_set_200each_inputs_2 , test_set_200each_inputs_3
 # Look at method 2
 
 # Save the data sets:
-
-with open('200each/balanced_200each_train_inputs_0.dat','w') as f:
+data_dir = '../../data/200each'
+with open(data_dir + 'balanced_200each_train_inputs_0.dat','w') as f:
 #with open('test_balanced_200each_train_inputs_0.dat','w') as f:
     pkl.dump(train_set_200each_inputs_0,f)
 
-with open('200each/balanced_200each_train_inputs_1.dat','w') as f:
+with open(data_dir + 'balanced_200each_train_inputs_1.dat','w') as f:
     pkl.dump(train_set_200each_inputs_1,f)
 
-with open('200each/balanced_200each_train_inputs_2.dat','w') as f:
+with open(data_dir + 'balanced_200each_train_inputs_2.dat','w') as f:
     pkl.dump(train_set_200each_inputs_2,f)
 
-with open('200each/balanced_200each_train_inputs_3.dat','w') as f:
+with open(data_dir + 'balanced_200each_train_inputs_3.dat','w') as f:
     pkl.dump(train_set_200each_inputs_3,f)
 
-with open('200each/balanced_200each_train_targets.dat','w') as f:
+with open(data_dir + 'balanced_200each_train_targets.dat','w') as f:
 #with open('test_balanced_200each_train_targets.dat','w') as f:
     pkl.dump(train_set_200each_targets,f)
 
-with open('200each/balanced_200each_test_inputs_0.dat','w') as f:
+with open(data_dir + 'balanced_200each_test_inputs_0.dat','w') as f:
 #with open('test_balanced_200each_test_inputs_0.dat','w') as f:
     pkl.dump(test_set_200each_inputs_0,f)
 
-with open('200each/balanced_200each_test_inputs_1.dat','w') as f:
+with open(data_dir + 'balanced_200each_test_inputs_1.dat','w') as f:
     pkl.dump(test_set_200each_inputs_1,f)
 
-with open('200each/balanced_200each_test_inputs_2.dat','w') as f:
+with open(data_dir + 'balanced_200each_test_inputs_2.dat','w') as f:
     pkl.dump(test_set_200each_inputs_2,f)
 
-with open('200each/balanced_200each_test_inputs_3.dat','w') as f:
+with open(data_dir + 'balanced_200each_test_inputs_3.dat','w') as f:
     pkl.dump(test_set_200each_inputs_3,f)
 
-with open('200each/balanced_200each_test_targets.dat','w') as f:
+with open(data_dir + 'balanced_200each_test_targets.dat','w') as f:
 #with open('test_balanced_200each_test_targets.dat','w') as f:
     pkl.dump(test_set_200each_targets,f)
