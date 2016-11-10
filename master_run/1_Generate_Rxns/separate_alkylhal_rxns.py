@@ -18,9 +18,6 @@ To Do:
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
-#from substrate_gen import AttachCarbonAtCarbon, AttachChlorineAtCarbon,\
-#            AttachBromineAtCarbon, AttachIodineAtCarbon,\
-#            CheckandRemoveDuplicates, get_molecule_smi
 from generate_substrates import get_molecule_smi
 from neuralfingerprint.toolkit import GetAdjHalAtoms, MarkBulkierAtom
 import numpy as np
