@@ -1,7 +1,7 @@
 import copy
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from toolkit import MarkMarkovAtom, GetDoubleBondAtoms, get_molecule_smi
+from neuralfingerprint.toolkit import MarkMarkovAtom, GetDoubleBondAtoms, get_molecule_smi
 from alkene_rxn_components import Mark_rxn_dict, other_rxn_dict
 
 import numpy as np

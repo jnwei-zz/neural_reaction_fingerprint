@@ -18,7 +18,7 @@ import copy
 from rdkit.Chem import AllChem
 from rxns_lib import Full_rxn_dict
 from neuralfingerprint.parse_data import split_smiles_triples
-from toolkit import MarkMarkovAtom, GetDoubleBondAtoms, get_molecule_smi
+from neuralfingerprint.toolkit import MarkMarkovAtom, GetDoubleBondAtoms, get_molecule_smi
 
 
 def returnRxnObjfromPred(rxn_num):

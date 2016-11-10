@@ -22,7 +22,7 @@ from rdkit.Chem import AllChem
 #            AttachBromineAtCarbon, AttachIodineAtCarbon,\
 #            CheckandRemoveDuplicates, get_molecule_smi
 from generate_substrates import get_molecule_smi
-from toolkit import GetAdjHalAtoms, MarkBulkierAtom
+from neuralfingerprint.toolkit import GetAdjHalAtoms, MarkBulkierAtom
 import numpy as np
 import copy
 
