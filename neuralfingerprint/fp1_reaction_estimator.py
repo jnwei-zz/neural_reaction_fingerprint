@@ -38,7 +38,7 @@ class rxn_estimator(BaseEstimator, RegressorMixin):
                     'batch_size' : 200, 'normalize'  : 1,
                     'dropout'    : 0,# 'fp_length': 10,
                     'fp_depth': 3, 'activation' :relu, 'fp_type' : 'morgan',
-                    'h1_size' : 100, 'conv_width': 20, 'num_outputs': 18, 
+                    'h1_size' : 100, 'conv_width': 20, 'num_outputs': 17, 
                     'init_bias': 0.85}): 
                     #log_l1_penalty= 10e-5,  log_l2_penalty= 10e-5):
         

@@ -7,6 +7,7 @@ linear_regression_estimator.py:
 
 single_run.py : 
     - Code for production run once hyperparameters have been selected
+    - requires fp1_reaction_estimator in neuralfingerprint ; this file is a copy of the same file in the 3_Hyperopt_training directory
 
 fancy_cmat_gen.py :
     - Code for generating a confusion matrix of the cross-validation data

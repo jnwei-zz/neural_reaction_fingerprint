@@ -22,7 +22,7 @@ import time
 from hyperopt import fmin, hp, tpe, STATUS_OK, Trials
 
 
-target_name_array = ['prob_'+str(i) for i in range(18)]
+target_name_array = ['prob_'+str(i) for i in range(17)]
 print target_name_array
 
 
@@ -35,7 +35,7 @@ other_param_dict = {'num_epochs' : 20,
                     'dropout'    : 0, 'fp_depth': 4, 'activation' :relu, 
                     'fp_type' : 'neural',
                     #'fp_type' : 'morgan', 
-                    'h1_size' : 100, 'conv_width': 20, 'num_outputs': 18, 
+                    'h1_size' : 100, 'conv_width': 20, 'num_outputs': 17, 
                     'init_bias': 0.85} 
 
 max_num_runs  = 100

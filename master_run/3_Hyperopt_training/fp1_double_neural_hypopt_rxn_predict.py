@@ -35,7 +35,7 @@ other_param_dict = {'num_epochs' : 20,
                     'batch_size' : 100, 'normalize'  :1 ,
                     'dropout'    : 0, 'fp_depth': 4, 'activation' :relu, 
                     'fp_type' : 'neural',
-                    'h1_size' : 100, 'conv_width': 20, 'num_outputs': 18, 
+                    'h1_size' : 100, 'conv_width': 20, 'num_outputs': 17, 
                     'init_bias': 0.85} 
 
 # Production run:

@@ -13,5 +13,5 @@ from build_triple_net import build_triple_convnet_fingerprint_fun, build_triple_
                              build_triple_conv_deep_net, build_triple_morgan_deep_net
 from parse_data import get_normalized_pred, confusion_matrix, accuracy, L1_error 
 from build_rxndiff_net import build_rxndiff_fingerprint_fun, build_rxndiff_deep_net
-from reaction_estimator import rxn_estimator 
+from fp1_reaction_estimator import rxn_estimator 
 from fancy_cmat_gen import labelled_cmat

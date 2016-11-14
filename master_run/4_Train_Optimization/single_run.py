@@ -5,7 +5,7 @@
 # run
 
 
-from fp1_reaction_estimator import rxn_estimator
+from neuralfingerprint.fp1_reaction_estimator import rxn_estimator
 from neuralfingerprint import relu
 import pickle as pkl
 import time
@@ -14,7 +14,7 @@ from neuralfingerprint.parse_data import confusion_matrix as conf_mat
 from scipy.misc import logsumexp
 
 
-num_outputs = 18
+num_outputs = 17
 other_param_dict = {'num_epochs' : 10,
                     'batch_size' : 100, 'normalize'  :0 ,
                     'dropout'    : 0, 'fp_depth': 4, 'activation' :relu, 
@@ -41,11 +41,11 @@ RE = rxn_estimator(-3.9815288594632183,-3.5896897128869263 ,767 , other_param_di
 #RE = rxn_estimator(-3.6682766762789663, -3.1635758381500736, 156, other_param_dict)
 
 
-train_input_1 = pkl.load(open("/home/jennifer/Documents/DeepMolecules-master/reaction_learn/Classification_3_1/data/200each/balanced_200each_train_inputs_1.dat"))
-train_targets = pkl.load(open("/home/jennifer/Documents/DeepMolecules-master/reaction_learn/Classification_3_1/data/200each/balanced_200each_train_targets.dat"))
+train_input_1 = pkl.load(open("../../data/200each/balanced_200each_train_inputs_1.dat"))
+train_targets = pkl.load(open("../../data/200each/balanced_200each_train_targets.dat"))
 
-test_input_1 = pkl.load(open("/home/jennifer/Documents/DeepMolecules-master/reaction_learn/Classification_3_1/data/200each/balanced_200each_test_inputs_1.dat"))
-test_targets = pkl.load(open("/home/jennifer/Documents/DeepMolecules-master/reaction_learn/Classification_3_1/data/200each/balanced_200each_test_targets.dat"))
+test_input_1 =  pkl.load(open("../../data/200each/balanced_200each_test_inputs_1.dat"))
+test_targets =  pkl.load(open("../../data/200each/balanced_200each_test_targets.dat"))
 
 
 print 'beginning training'
