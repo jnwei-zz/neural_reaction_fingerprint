@@ -7,6 +7,9 @@ The code in the neural fingerprint directory is heavily based on :
 
 [Convolutional Networks on Graphs for Learning Molecular Fingerprints](http://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints)
 
+The code for the above paper can be found at :
+[HIPS/neural-fingerprint](https://github.com/HIPS/neural-fingerprint)
+
 
 ## How to install
 
