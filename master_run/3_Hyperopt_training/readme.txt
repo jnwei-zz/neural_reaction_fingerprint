@@ -3,8 +3,8 @@ Scripts that were used to run hyperparameter optimization on Harvard's Odyssey C
 # Scripts for running sklearn estimator
 fp1_double_hypopt_rxn_predict.py   - Use these if you want to use  two molecular Morgan fingerprint inputs
 fp1_double_neural_hypopt_rxn_predict.py  - Use these if you want to use two molecular neural fingerprint inputs
-fp1_morgan_hypopt_rxn_predict.py   - Use these if you want to use 
-fp1_neural_hypopt_rxn_predict.py
+fp1_morgan_hypopt_rxn_predict.py   - Use these if you want to use 3 molecular morgan fingerprints 
+fp1_neural_hypopt_rxn_predict.py   - Use these if you want to use 3 molecular neural fingerprints 
 
 # sklearn wrapper of Regressor object for reaction estimation (wrapper for the neural fingerprint code) 
 #  required by all the codes above

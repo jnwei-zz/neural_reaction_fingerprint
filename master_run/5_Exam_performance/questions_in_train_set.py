@@ -2,9 +2,13 @@ import pickle as pkl
 from rdkit import Chem, DataStructs
 import numpy as np
 from rdkit.Chem.Fingerprints import FingerprintMols
+import sys
+
+sys.path.append('../../')
 
 
-train_input_0 = pkl.load(open("/home/jennifer/Documents/DeepMolecules-master/reaction_learn/Classification_3_3/data/200each/balanced_200each_train_inputs_0.dat"))
+# change this to location of training input directory
+train_input_0 = pkl.load(open("data/200each/balanced_200each_train_inputs_0.dat"))
     
 problem_list = ['Wade8_47', 'Wade8_48']
 

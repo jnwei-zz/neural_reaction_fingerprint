@@ -1,7 +1,7 @@
 
 Scripts for generating predictions on textbook questions:
 - take_test_baseline.py        - take test using baseline method
-    - Requires running of baseline_1.py in previous 4_
+    - Requires running of baseline_1.py in previous directory (4_Train_Optimization/)
 - take_test_method1.py         - take test using morgan fingerprint method
 - take_test_method1_neural.py  - take test using neural fingerprint method
 

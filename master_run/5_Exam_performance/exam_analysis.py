@@ -92,12 +92,12 @@ def calculate_accuracy(question_pred, question_ans):
 if __name__ == '__main__':
     num_rxns = 18
 
-    batch_header = 'class_3_2'
-    method_list = ['bl_rgt', 'bl_rct2', 'bl_rgt_rct2', 'morgan1', 'neural1'] 
+    batch_header = '200_each'
+    method_list =  ['morgan', 'neural'] 
+                    #'bl_rgt', 'bl_rct2', 'bl_rgt_rct2'] 
 
     # Load answers
-    problem_list = ['Wade8_47', 'Wade8_48', #'Jones6_28', 'Jones6_30', 
-                    'Jones6_40', 'Jones6_41', 'Jones9_38']
+    problem_list = ['Wade8_47', 'Wade8_48']
     with open('answers.txt') as ansf:
        answers = ansf.readlines() 
 
